@@ -1,8 +1,9 @@
 {
     "name": "kvbishnoi/mypackage",
+    "version": "1.0.0",
     "description": "my own package for my personal usage",
     "type": "library",
-    "license": "by Vikash Kumr",
+    "license": "by Vikash Kumar",
     "autoload": {
         "psr-4": {
             "Kvbishnoi\\mypackage\\": "src/"
@@ -14,5 +15,8 @@
             "email": "shambishnoi75@gmail.com"
         }
     ],
-    "require": {}
+    "require": {
+        "illuminate/support": "^11.0",
+         "php": "^8.1"
+    }
 }
