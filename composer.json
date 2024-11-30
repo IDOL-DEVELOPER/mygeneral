@@ -1,6 +1,6 @@
 {
     "name": "sentix/general",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "description": "my own package for my personal usage",
     "type": "library",
     "license": "MIT",
