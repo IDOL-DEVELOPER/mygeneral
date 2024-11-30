@@ -1,7 +1,7 @@
 <?php
 
 
-namespace Kvbishnoi;
+namespace Sentix;
 
 
 class NumToText
