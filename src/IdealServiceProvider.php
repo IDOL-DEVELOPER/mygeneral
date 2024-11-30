@@ -1,6 +1,7 @@
 <?php
 
-namespace VendorName\MyPackage;
+
+namespace Kvbishnoi\mypackage;
 
 use Illuminate\Support\ServiceProvider;
 
