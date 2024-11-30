@@ -44,17 +44,46 @@ class NumToText
             80 => 'Eighty',
             90 => 'Ninety'
         ];
-
+    
+        // Handle numbers from 0-19
         if ($number < 20) {
             return $words[$number];
-        } elseif ($number < 100) {
-            return $words[intval($number / 10) * 10] . ($number % 10 ? ' ' . $words[$number % 10] : '');
-        } elseif ($number < 1000) {
-            return $words[intval($number / 100)] . ' Hundred' . ($number % 100 ? ' and ' . self::convertNumberToWords($number % 100) : '');
-        } else {
-            return $number; // Handle larger numbers as needed
         }
+    
+        // Handle numbers from 20-99
+        if ($number < 100) {
+            return $words[intval($number / 10) * 10] . ($number % 10 ? ' ' . $words[$number % 10] : '');
+        }
+    
+        // Handle numbers from 100-999
+        if ($number < 1000) {
+            return $words[intval($number / 100)] . ' Hundred' . ($number % 100 ? ' and ' . self::convertNumberToWords($number % 100) : '');
+        }
+    
+        // Handle numbers from 1000-999999 (thousands)
+        if ($number < 1000000) {
+            return self::convertNumberToWords(intval($number / 1000)) . ' Thousand' . ($number % 1000 ? ' ' . self::convertNumberToWords($number % 1000) : '');
+        }
+    
+        // Handle numbers from 1000000-999999999 (millions)
+        if ($number < 1000000000) {
+            return self::convertNumberToWords(intval($number / 1000000)) . ' Million' . ($number % 1000000 ? ' ' . self::convertNumberToWords($number % 1000000) : '');
+        }
+    
+        // Handle numbers from 1000000000-999999999999 (billions)
+        if ($number < 1000000000000) {
+            return self::convertNumberToWords(intval($number / 1000000000)) . ' Billion' . ($number % 1000000000 ? ' ' . self::convertNumberToWords($number % 1000000000) : '');
+        }
+    
+        // Handle larger numbers (trillions, quadrillions, etc.)
+        if ($number < 1000000000000000) {
+            return self::convertNumberToWords(intval($number / 1000000000000)) . ' Trillion' . ($number % 1000000000000 ? ' ' . self::convertNumberToWords($number % 1000000000000) : '');
+        }
+    
+        // Default fallback if needed
+        return $number; // Can be extended for even larger numbers.
     }
+    
 
     /**
      * Convert words to number (for simple cases like "One", "Twenty", etc.)
@@ -64,6 +93,7 @@ class NumToText
      */
     public static function convertWordsToNumber($words)
     {
+        // Define words-to-numbers mapping
         $wordsToNumbers = [
             'zero' => 0,
             'one' => 1,
@@ -92,25 +122,45 @@ class NumToText
             'sixty' => 60,
             'seventy' => 70,
             'eighty' => 80,
-            'ninety' => 90
+            'ninety' => 90,
+            'hundred' => 100,
+            'thousand' => 1000,
+            'million' => 1000000,
+            'billion' => 1000000000,
+            'trillion' => 1000000000000,
         ];
-
-        $words = strtolower($words); // Case insensitive
+    
+        $words = strtolower($words); // Make case-insensitive
         $number = 0;
-
-        // Convert simple words directly
-        if (isset($wordsToNumbers[$words])) {
-            return $wordsToNumbers[$words];
-        }
-
-        // Handling compound numbers like "Twenty One"
+        $temp = 0;
+        $multiplier = 1;
+    
+        // Split the words into parts
         $parts = explode(' ', $words);
+    
         foreach ($parts as $part) {
+            // If the part is a number word
             if (isset($wordsToNumbers[$part])) {
-                $number += $wordsToNumbers[$part];
+                // If the part is "hundred", multiply the previous number
+                if ($part == 'hundred') {
+                    $temp *= $wordsToNumbers[$part];
+                } elseif ($part == 'thousand' || $part == 'million' || $part == 'billion' || $part == 'trillion') {
+                    // If the part is a large number (thousand, million, billion, trillion)
+                    $temp *= $wordsToNumbers[$part];
+                    $number += $temp; // Add the current value to the total number
+                    $temp = 0; // Reset temp for the next part
+                } else {
+                    // If it's a regular number word, add its value
+                    $temp += $wordsToNumbers[$part];
+                }
             }
         }
-
+    
+        // Add the remaining value of temp to the total number
+        $number += $temp;
+    
         return $number;
     }
+    
+    
 }
