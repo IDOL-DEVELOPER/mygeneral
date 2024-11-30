@@ -1,12 +1,12 @@
 {
-    "name": "kvbishnoi/mypackage",
+    "name": "sentix/general",
     "version": "1.0.0",
     "description": "my own package for my personal usage",
     "type": "library",
     "license": "MIT",
     "autoload": {
         "psr-4": {
-            "Kvbishnoi\\": "src/Kvbishnoi/"
+            "Sentix\\": "src/Kvbishnoi/"
         }
     },
     "authors": [

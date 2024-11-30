@@ -1,7 +1,7 @@
 <?php
 
 
-namespace Kvbishnoi\mypackage;
+namespace Src;
 
 use Illuminate\Support\ServiceProvider;
 

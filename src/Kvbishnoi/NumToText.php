@@ -1,7 +1,7 @@
 <?php
 
 
-namespace Src\Services;
+namespace Kvbishnoi;
 
 
 class NumToText
