@@ -3,7 +3,7 @@
     "version": "1.0.0",
     "description": "my own package for my personal usage",
     "type": "library",
-    "license": "by Vikash Kumar",
+    "license": "MIT",
     "autoload": {
         "psr-4": {
             "Kvbishnoi\\mypackage\\": "src/"
