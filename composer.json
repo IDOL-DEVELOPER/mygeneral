@@ -6,7 +6,7 @@
     "license": "MIT",
     "autoload": {
         "psr-4": {
-            "Kvbishnoi\\mypackage\\": "src/"
+            "Kvbishnoi": "src/Kvbishnoi"
         }
     },
     "authors": [
